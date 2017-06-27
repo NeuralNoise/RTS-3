@@ -144,10 +144,28 @@ GameObject:
   - 114: {fileID: 114000013777824696}
   - 114: {fileID: 114000014167128678}
   - 114: {fileID: 114000012803591068}
+  - 114: {fileID: 114000014265119054}
+  - 114: {fileID: 114000014193223816}
+  - 114: {fileID: 114000013854783200}
   m_Layer: 0
   m_Name: Infantry
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000012997528802
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013606436840}
+  m_Layer: 0
+  m_Name: SpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: -1944569537103914328, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -160,7 +178,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012442687674}
   m_Layer: 0
-  m_Name: Weapon1
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +221,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012285989950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -264,6 +282,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000013506032606}
+  - {fileID: 4000013606436840}
   m_Father: {fileID: 4000011627584940}
   m_RootOrder: 1
 --- !u!4 &4000013303244302
@@ -273,7 +292,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011397639584}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -293,6 +312,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000012442687674}
   m_RootOrder: 0
+--- !u!4 &4000013606436840
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012997528802}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.535, y: 0.667, z: 1.245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012442687674}
+  m_RootOrder: 1
 --- !u!4 &4000013862367336
 Transform:
   m_ObjectHideFlags: 1
@@ -595,7 +627,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb2b4a8b2453f14cba7317b16271d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mHp: 0
+--- !u!114 &114000013854783200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012285989950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b391c8f8b9f231649b44967e43ffe510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapPointPrefab: {fileID: 0}
 --- !u!114 &114000014167128678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -607,6 +650,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3f292d9cf45c14fba1c86e564a4d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000014193223816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012285989950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d217f706760de9e46b68c9debda10425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRate: 5
+  senseRadius: 7
+  rotateSpeed: 300
+  BulletPrefab: {fileID: 1000011975929430, guid: d338d4c4fd9d1ba4b89fb65c96974e6b,
+    type: 2}
+  SpawnPos: {fileID: 4000013606436840}
+--- !u!114 &114000014265119054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012285989950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00ec467b2a07764cb652dae4002717e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSymbol: {fileID: 1000013890105692, guid: 52aaf8d977e87c84d8172eb008b5759c,
+    type: 2}
 --- !u!195 &195000010653832444
 NavMeshAgent:
   m_ObjectHideFlags: 1

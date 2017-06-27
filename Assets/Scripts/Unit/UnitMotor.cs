@@ -28,6 +28,8 @@ public class UnitMotor : MonoBehaviour {
     void Init()
     {
         mAgent.speed = speed;
+        mAgent.angularSpeed = 1000;
+        mAgent.acceleration = 1000;
     }
 
     public void MoveTo(Vector3 target)

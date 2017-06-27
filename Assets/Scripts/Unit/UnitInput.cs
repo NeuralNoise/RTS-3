@@ -4,7 +4,9 @@ using System.Collections;
 /// <summary>
 /// 处理输入，比如点击
 /// </summary>
-[RequireComponent(typeof(UnitInteraction))]
+[RequireComponent(typeof(UnitInteraction))] //点击自己选择
+[RequireComponent(typeof(UnitMotor))] //点击地面移动
+[RequireComponent(typeof(UnitAttack))] //点击敌人攻击
 public class UnitInput : MonoBehaviour {
     public GameObject clickSymbol;
 
@@ -12,36 +14,40 @@ public class UnitInput : MonoBehaviour {
     private bool mIsLastTimeSelected = false;
 
     private UnitInteraction mInteraction;
+    private UnitMotor mMotor;
+    private UnitAttack mAttack;
 
 	void Start () {
         mInteraction = this.GetComponent<UnitInteraction>();
+        mMotor = this.GetComponent<UnitMotor>();
+        mAttack = this.GetComponent<UnitAttack>();
 
         InputManager.Instance.ClickUpAction += MouseClick;
 	}
 
-    void Destroy()
+    void OnDestroy()
     {
         InputManager.Instance.ClickUpAction -= MouseClick;
     }
 	
-	void Update () {
+    void MouseClick()
+    {
         bool isLastTimeSelected = mIsLastTimeSelected;
         mIsLastTimeSelected = false;
 
         RaycastHit hitInfo;
-        if(IsClickSomething(out hitInfo))
+        if (IsClickSomething(out hitInfo))
         {
             GameObject hitGo = hitInfo.collider.gameObject;
             if (hitGo == gameObject)
                 HandleClickMyself(isLastTimeSelected);
+            else if (hitGo.layer == LayerMask.NameToLayer(GlobalDefines.GROUND_LAYER))
+                HandleClickGround(hitInfo.point);
+            else if (hitGo.tag == GlobalDefines.ENEMY_TAG)
+                HandleClickEnemy(hitGo);
         }
 
         mLastClickTime = Time.time;
-	}
-
-    void MouseClick()
-    {
-
     }
 
     bool IsClickSomething(out RaycastHit hitInfo)
@@ -63,7 +69,28 @@ public class UnitInput : MonoBehaviour {
         bool isDoubleClick = isLastTimeSelected && (Time.time - mLastClickTime <= GlobalDefines.DOUBLE_CLICK_GAP);
         if(isDoubleClick)
         {
-            Debug.Log("双击了");
+            Debug.Log("双击了"); //TODO
+        }
+    }
+
+    void HandleClickGround(Vector3 pos)
+    {
+        if (mInteraction.IsSelected)
+        {
+            GameObject clickSign = Instantiate(clickSymbol) as GameObject;
+            clickSign.transform.position = pos + Vector3.up * 0.01f; //稍微高出地面一点以免被地挡住
+
+            mMotor.MoveTo(pos);
+        }
+    }
+
+    void HandleClickEnemy(GameObject enemy)
+    {
+        if(mInteraction.IsSelected)
+        {
+            UnitInteraction enemyInteraction = enemy.GetComponent<UnitInteraction>();
+            enemyInteraction.Select();
+            mAttack.LockTarget(enemy.transform);
         }
     }
 }

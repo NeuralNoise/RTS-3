@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System;
 using System.Collections;
 
@@ -40,12 +41,12 @@ public class InputManager : MonoBehaviour {
 
         HandleClick();
 
-        if(mIsDraging && DragAction != null)
+        if (mIsDraging && DragAction != null)
         {
             DragAction(mLastDragPos, Input.mousePosition);
             mLastDragPos = Input.mousePosition;
         }
-	}
+    }
 
     void HandleClick()
     {
