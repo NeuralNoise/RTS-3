@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(UnitData))]
 public class UnitAttack : MonoBehaviour {
     public int attackRate = 5; //攻击速度（次数/秒）
-    public float senseRadius = 7f; //进入该范围才攻击
+    public float senseRadius; //进入该范围才攻击
     public float rotateSpeed = 20f;
     
     public GameObject BulletPrefab;
@@ -43,6 +43,7 @@ public class UnitAttack : MonoBehaviour {
 
     void OnDrawGizmos()
     {
+        //绘制攻击范围
         Gizmos.color = new Color(1, 0, 0, 0.8f);
         Gizmos.DrawWireSphere(transform.position, senseRadius);
     }

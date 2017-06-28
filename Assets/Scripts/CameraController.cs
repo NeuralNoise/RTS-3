@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
-    public float sensity = 0.0005f;
+    public float sensity = 0.025f;
     public Vector2 HorizontalBorder; //(minX, maxX)
     public Vector2 VerticalBorder; //(minY, maxY)
 

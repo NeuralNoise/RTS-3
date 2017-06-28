@@ -141,12 +141,12 @@ GameObject:
   - 65: {fileID: 65000013752822118}
   - 195: {fileID: 195000010653832444}
   - 114: {fileID: 114000010267636566}
-  - 114: {fileID: 114000013777824696}
   - 114: {fileID: 114000014167128678}
   - 114: {fileID: 114000012803591068}
   - 114: {fileID: 114000014265119054}
   - 114: {fileID: 114000014193223816}
   - 114: {fileID: 114000013854783200}
+  - 114: {fileID: 114000013706394982}
   m_Layer: 0
   m_Name: Infantry
   m_TagString: Player
@@ -221,7 +221,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012285989950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: 0}
+  m_LocalPosition: {x: -6.75, y: 0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
---- !u!114 &114000013777824696
+--- !u!114 &114000013706394982
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 5
-  senseRadius: 7
+  senseRadius: 10
   rotateSpeed: 300
   BulletPrefab: {fileID: 1000011975929430, guid: d338d4c4fd9d1ba4b89fb65c96974e6b,
     type: 2}

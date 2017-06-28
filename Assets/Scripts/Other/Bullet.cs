@@ -24,15 +24,12 @@ public class Bullet : MonoBehaviour {
     {
         if(coll.transform.gameObject == mTarget.gameObject)
         {
-            if (coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Player")
+            if (coll.gameObject.tag == GlobalDefines.ENEMY_TAG || 
+                coll.gameObject.tag == GlobalDefines.PLAYER_TAG ||
+                coll.gameObject.tag == GlobalDefines.BUILDING_TAG)
             {
                 UnitData data = coll.transform.GetComponent<UnitData>();
                 data.DecreaseHp(demage);
-            }
-            else if (coll.gameObject.tag == "Building") //TODO
-            {
-                //Building b = coll.transform.GetComponent<Building>();
-                //b.BeingHit(Demage);
             }
             Destroy(gameObject);
         }

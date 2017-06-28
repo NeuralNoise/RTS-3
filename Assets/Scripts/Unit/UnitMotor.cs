@@ -34,10 +34,14 @@ public class UnitMotor : MonoBehaviour {
 
     public void MoveTo(Vector3 target)
     {
-        if (mAgent == null)
-            mAgent = this.GetComponent<NavMeshAgent>();
-
         mAgent.Resume();
         mAgent.SetDestination(target);
+    }
+
+    public void MoveUntilSense(Vector3 target)
+    {
+        mAgent.Resume();
+        mAgent.SetDestination(target);
+        //mAgent.
     }
 }

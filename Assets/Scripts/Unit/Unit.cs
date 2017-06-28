@@ -4,8 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(UnitData))]
 [RequireComponent(typeof(UnitInteraction))]
 public class Unit : MonoBehaviour {
-    public GameObject MapPointPrefab;
-
     private UnitInteraction mInteraction;
     private UnitData mData;
     private Transform mMapPoint;
@@ -18,6 +16,7 @@ public class Unit : MonoBehaviour {
 
 	void Start () {
         mInteraction.Deselect();
+        MapManager.Instance.Add(transform);
 	}
 	
 	void Update () {

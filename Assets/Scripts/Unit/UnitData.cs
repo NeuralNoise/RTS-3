@@ -11,7 +11,7 @@ public class UnitData : MonoBehaviour {
         set { mTeamSide = value; }
     } 
     
-	void Start () {
+    void Start () {
         mHp = GlobalDefines.MAX_HP;
         mTeamSide = Team.Team1;
 	}
@@ -24,6 +24,15 @@ public class UnitData : MonoBehaviour {
     public void DecreaseHp(int num)
     {
         mHp -= num;
-        mHp = mHp <= 0 ? 0 : mHp;
+        if(mHp <= 0)
+        {
+            mHp = 0;
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }

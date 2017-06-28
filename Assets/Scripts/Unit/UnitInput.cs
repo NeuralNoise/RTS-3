@@ -45,6 +45,8 @@ public class UnitInput : MonoBehaviour {
                 HandleClickGround(hitInfo.point);
             else if (hitGo.tag == GlobalDefines.ENEMY_TAG)
                 HandleClickEnemy(hitGo);
+            else if (hitGo.tag == GlobalDefines.BUILDING_TAG)
+                HandleClickBuilding(hitGo);
         }
 
         mLastClickTime = Time.time;
@@ -91,6 +93,14 @@ public class UnitInput : MonoBehaviour {
             UnitInteraction enemyInteraction = enemy.GetComponent<UnitInteraction>();
             enemyInteraction.Select();
             mAttack.LockTarget(enemy.transform);
+        }
+    }
+
+    void HandleClickBuilding(GameObject building)
+    {
+        if(mInteraction.IsSelected)
+        {
+            mAttack.LockTarget(building.transform);
         }
     }
 }

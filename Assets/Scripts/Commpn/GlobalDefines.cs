@@ -7,8 +7,10 @@ public class GlobalDefines {
     public const float DOUBLE_CLICK_GAP = 0.5f; //两次点击要在这个时间内才算双击
 
     //Tags
+    public const string PLAYER_TAG = "Player";
     public const string MAIN_CAMERA_TAG = "MainCamera";
     public const string ENEMY_TAG = "Enemy";
+    public const string BUILDING_TAG = "Building";
 
     //Layers
     public const string GROUND_LAYER = "Ground";
