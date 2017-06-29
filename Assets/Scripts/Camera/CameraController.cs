@@ -9,11 +9,13 @@ public class CameraController : MonoBehaviour {
     void Start()
     {
         InputManager.Instance.DragAction += DragCamera;
+        MapManager.Instance.Add(transform, true);
     }
 
     void Destroy()
     {
         InputManager.Instance.DragAction -= DragCamera;
+        MapManager.Instance.Remove(transform);
     }
 
     void DragCamera(Vector3 dragBegin, Vector3 dragEnd)

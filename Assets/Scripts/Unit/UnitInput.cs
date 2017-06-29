@@ -83,6 +83,7 @@ public class UnitInput : MonoBehaviour {
             clickSign.transform.position = pos + Vector3.up * 0.01f; //稍微高出地面一点以免被地挡住
 
             mMotor.MoveTo(pos);
+            mAttack.UnlockTarget();
         }
     }
 

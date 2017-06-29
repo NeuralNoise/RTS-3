@@ -11,7 +11,7 @@ public class MapManager : MonoBehaviour {
     public GameObject CameraRectPrefab;
     public GameObject MapPointPrefab;
 
-    private Dictionary<Transform, RectTransform> mUnit2MapPointDic;
+    private Dictionary<Transform, RectTransform> mUnit2MiniObj;
     private Vector2 mHorizontalRange;
     private Vector2 mVerticalRange;
     private RectTransform mMiniMap;
@@ -31,7 +31,7 @@ public class MapManager : MonoBehaviour {
         mVerticalRange = new Vector2(downBorderZ, upBorderZ);
 
         mMiniMap = GameObject.Find("MiniMap").GetComponent<RectTransform>();
-        mUnit2MapPointDic = new Dictionary<Transform, RectTransform>();
+        mUnit2MiniObj = new Dictionary<Transform, RectTransform>();
     }
 
 	void Start () {
@@ -42,30 +42,41 @@ public class MapManager : MonoBehaviour {
         Refresh();
 	}
 
-    public void Add(Transform unit)
+    public void Add(Transform unit, bool isCamera = false)
     {
-        if(mUnit2MapPointDic.ContainsKey(unit) == false)
+        if(mUnit2MiniObj.ContainsKey(unit) == false)
         {
-            RectTransform mapPoint = GameObject.Instantiate(MapPointPrefab).GetComponent<RectTransform>();
-            mapPoint.parent = mMiniMap.Find("MapPointContainer");
-            mUnit2MapPointDic.Add(unit, mapPoint);
+            if(isCamera)
+            {
+                RectTransform cameraRect = GameObject.Instantiate(CameraRectPrefab).GetComponent<RectTransform>();
+                cameraRect.SetParent(mMiniMap.Find("Container"));
+                cameraRect.localScale = new Vector3(1, 1, 1);
+                mUnit2MiniObj.Add(unit, cameraRect);
+            }
+            else
+            {
+                RectTransform mapPoint = GameObject.Instantiate(MapPointPrefab).GetComponent<RectTransform>();
+                mapPoint.SetParent(mMiniMap.Find("Container"));
+                mapPoint.localScale = new Vector3(1, 1, 1);
+                mUnit2MiniObj.Add(unit, mapPoint);
+            }
         }
     }
 
     public void Remove(Transform unit)
     {
-        if (mUnit2MapPointDic.ContainsKey(unit))
+        if (mUnit2MiniObj.ContainsKey(unit))
         {
-            RectTransform mapPoint = mUnit2MapPointDic[unit];
-            mUnit2MapPointDic.Remove(unit);
-            Destroy(mapPoint.gameObject);
+            RectTransform miniObj = mUnit2MiniObj[unit];
+            mUnit2MiniObj.Remove(unit);
+            Destroy(miniObj.gameObject);
         }
     }
 
     void Refresh()
     {
         List<Transform> removeList = new List<Transform>();
-        foreach(var pair in mUnit2MapPointDic)
+        foreach(var pair in mUnit2MiniObj)
         {
             if(pair.Key == null)
             {

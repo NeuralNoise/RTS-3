@@ -268,4 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415dfb6f7a43e734a99206a4ef223f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraRectPrefab: {fileID: 0}
+  CameraRectPrefab: {fileID: 1000012556908768, guid: 6ea9ad13cbe323241a8a5f597547ff78,
+    type: 2}
+  MapPointPrefab: {fileID: 1000014112969642, guid: 46b275065d04b5448a852916c5b634ae,
+    type: 2}
