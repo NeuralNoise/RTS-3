@@ -38,6 +38,7 @@ public class UnitMotor : MonoBehaviour {
         mAgent.SetDestination(target);
     }
 
+    //TODO
     public void MoveUntilSense(Vector3 target)
     {
         mAgent.Resume();

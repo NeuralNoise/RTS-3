@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012314548290}
   - 95: {fileID: 95000012423316176}
+  - 114: {fileID: 114000012894446660}
   m_Layer: 0
   m_Name: Helicopter
   m_TagString: Untagged
@@ -112,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011729548744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.48, y: 0.88, z: 0.91}
+  m_LocalPosition: {x: -28.761353, y: 0, z: -12.656897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -140,7 +141,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011553163994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -262,3 +263,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000012894446660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011729548744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f410a7af2fafa0440a340fe5f794e093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHeight: 6
+  maxRotateSpeed: 500
+  rotateAcceration: 200
+  flyUpSpeed: 3
+  flyHorizontalSpeed: 5
+  testOn: 1
