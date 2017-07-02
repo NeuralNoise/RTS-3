@@ -12,14 +12,12 @@ public class UnitAttack : MonoBehaviour {
 
     private Transform mTarget;
     private Transform mWeapon;
-    private Vector3 mOriginPos;
     private UnitData mData;
     private float mTimer = 0;
 
     void Awake()
     {
         mWeapon = transform.Find("Weapon");
-        mOriginPos = mWeapon.localPosition;
         mData = this.GetComponent<UnitData>();
     }
     

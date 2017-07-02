@@ -18,8 +18,4 @@ public class Unit : MonoBehaviour {
         mInteraction.Deselect();
         MapManager.Instance.Add(transform);
 	}
-	
-	void Update () {
-	
-	}
 }

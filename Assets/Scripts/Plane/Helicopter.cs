@@ -21,7 +21,7 @@ public class Helicopter : MonoBehaviour {
 
     void Awake()
     {
-        mTop = transform.Find("Model/Top");
+        mTop = transform.Find("Top");
         mAgent = this.GetComponent<NavMeshAgent>();
         mAgent.enabled = false;
         mAgent.Warp(transform.position);
