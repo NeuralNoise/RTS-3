@@ -11,9 +11,9 @@ public class MapManager : MonoBehaviour {
     public GameObject CameraRectPrefab;
     public GameObject MapPointPrefab;
 
-    private Dictionary<Transform, RectTransform> mUnit2MiniObj;
     private Vector2 mHorizontalRange;
     private Vector2 mVerticalRange;
+    private Dictionary<Transform, RectTransform> mUnit2MiniObj;
     private RectTransform mMiniMap;
 
     void Awake()
@@ -71,6 +71,26 @@ public class MapManager : MonoBehaviour {
             mUnit2MiniObj.Remove(unit);
             Destroy(miniObj.gameObject);
         }
+    }
+
+    public Vector3 TopLeft()
+    {
+        return new Vector3(mHorizontalRange.x, 0, mVerticalRange.y);
+    }
+
+    public Vector3 TopRight()
+    {
+        return new Vector3(mHorizontalRange.y, 0, mVerticalRange.y);
+    }
+
+    public Vector3 BottomLeft()
+    {
+        return new Vector3(mHorizontalRange.x, 0, mVerticalRange.x);
+    }
+
+    public Vector3 BottomRight()
+    {
+        return new Vector3(mHorizontalRange.y, 0, mVerticalRange.x);
     }
 
     void Refresh()
