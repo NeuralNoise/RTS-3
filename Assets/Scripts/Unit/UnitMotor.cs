@@ -8,16 +8,16 @@ using System.Collections;
 public class UnitMotor : MonoBehaviour {
     public float speed = 10f;
 
-    private NavMeshAgent mAgent;
-    private bool mIsFirstFrame = true;
+    protected NavMeshAgent mAgent;
+    protected bool mIsFirstFrame = true;
 
-    void Awake()
+    protected void Awake()
     {
         mAgent = this.GetComponent<NavMeshAgent>();
         mAgent.Warp(transform.position);
     }
-    
-	void Update () {
+
+    protected void Update () {
         if (mIsFirstFrame)
         {
             mIsFirstFrame = false;
@@ -25,14 +25,14 @@ public class UnitMotor : MonoBehaviour {
         }
 	}
 
-    void Init()
+    protected void Init()
     {
         mAgent.speed = speed;
         mAgent.angularSpeed = 1000;
         mAgent.acceleration = 1000;
     }
 
-    public void MoveTo(Vector3 target)
+    public virtual void MoveTo(Vector3 target)
     {
         mAgent.Resume();
         mAgent.SetDestination(target);

@@ -778,27 +778,61 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012453684594, guid: e0873da04c297ae41a1e374a75bc4d21,
     type: 2}
   m_PrefabInternal: {fileID: 769588295}
---- !u!1 &469892859 stripped
+--- !u!1 &450996508 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000011729548744, guid: 145b1136eeebdac4db8811f55f4f9426,
     type: 2}
   m_PrefabInternal: {fileID: 2071861291}
+--- !u!95 &450996511
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 450996508}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 36b7b58cf2734524fbe478a20221424f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &450996518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 450996508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abdd2891bdf5d64da92d2b8e5fe5d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetHeight: 6
+  maxRotateSpeed: 500
+  rotateAcceration: 200
+  flyUpSpeed: 3
+  moveSpeed: 10
+--- !u!114 &450996519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 450996508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c235857ef969e458e2d8b2c6dd0360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!4 &469892862 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012314548290, guid: 145b1136eeebdac4db8811f55f4f9426,
     type: 2}
   m_PrefabInternal: {fileID: 2071861291}
---- !u!114 &469892869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 469892859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b391c8f8b9f231649b44967e43ffe510, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &477684966
 Prefab:
   m_ObjectHideFlags: 0
@@ -1070,7 +1104,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000012803591068, guid: 7668a474c37a6b24cbf57e032b720640, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7668a474c37a6b24cbf57e032b720640, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &583505436
@@ -1873,6 +1908,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 826780255}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &844847704 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012285989950, guid: 7668a474c37a6b24cbf57e032b720640,
+    type: 2}
+  m_PrefabInternal: {fileID: 574518005}
+--- !u!114 &844847709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 844847704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a8518afd404484288b8a20b52f07f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &873338744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,7 +2738,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1232818868}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8a5447f22644c34f9f9d41cec0fbbc4, type: 3}
   m_Name: 
@@ -4892,7 +4944,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114000012894446660, guid: 145b1136eeebdac4db8811f55f4f9426,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114000011975593764, guid: 145b1136eeebdac4db8811f55f4f9426, type: 2}
+    - {fileID: 114000012894446660, guid: 145b1136eeebdac4db8811f55f4f9426, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 145b1136eeebdac4db8811f55f4f9426, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2093431597
