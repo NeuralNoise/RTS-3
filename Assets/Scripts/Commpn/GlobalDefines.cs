@@ -14,4 +14,5 @@ public class GlobalDefines {
 
     //Layers
     public const string GROUND_LAYER = "Ground";
+    public const string SEA_LAYER = "Sea";
 }

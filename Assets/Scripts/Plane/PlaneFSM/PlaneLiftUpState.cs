@@ -25,12 +25,7 @@ public class PlaneLiftUpState : StateMachineBehaviour {
             animator.SetBool("IsHighEnough", true);
         }
     }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
-    }
-
+    
     /// <summary>
     /// 转动螺旋桨
     /// 逐渐加速直到最大值
@@ -53,7 +48,7 @@ public class PlaneLiftUpState : StateMachineBehaviour {
         float height = oldPos.y;
         if (isRotateSpeedEnough)
         {
-            height += Time.deltaTime * mPlane.flyUpSpeed;
+            height += Time.deltaTime * mPlane.flyVerticalSpeed;
         }
         height = Mathf.Clamp(height, 0, mPlane.targetHeight);
         mTrans.localPosition = new Vector3(oldPos.x, height, oldPos.z);        

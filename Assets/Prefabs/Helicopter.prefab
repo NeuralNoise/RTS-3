@@ -38,16 +38,17 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012314548290}
-  - 114: {fileID: 114000012894446660}
   - 195: {fileID: 195000011188234066}
   - 114: {fileID: 114000013086921200}
   - 114: {fileID: 114000013661795700}
   - 114: {fileID: 114000013920631244}
   - 114: {fileID: 114000011549317274}
   - 114: {fileID: 114000012571440324}
-  - 114: {fileID: 114000011975593764}
   - 114: {fileID: 114000012873785908}
   - 65: {fileID: 65000010176886878}
+  - 95: {fileID: 95000010027009882}
+  - 114: {fileID: 114000013349334560}
+  - 114: {fileID: 114000012713779970}
   m_Layer: 0
   m_Name: Helicopter
   m_TagString: Player
@@ -565,6 +566,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95000010027009882
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011729548744}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 36b7b58cf2734524fbe478a20221424f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000010559748132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,18 +608,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSymbol: {fileID: 1000013890105692, guid: 52aaf8d977e87c84d8172eb008b5759c,
     type: 2}
---- !u!114 &114000011975593764
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011729548744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a8518afd404484288b8a20b52f07f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
 --- !u!114 &114000012571440324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -619,6 +625,18 @@ MonoBehaviour:
   BulletPrefab: {fileID: 1000011975929430, guid: d338d4c4fd9d1ba4b89fb65c96974e6b,
     type: 2}
   SpawnPos: {fileID: 4000014231883078}
+--- !u!114 &114000012713779970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011729548744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c235857ef969e458e2d8b2c6dd0360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!114 &114000012873785908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -630,23 +648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b391c8f8b9f231649b44967e43ffe510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114000012894446660
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011729548744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f410a7af2fafa0440a340fe5f794e093, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHeight: 6
-  maxRotateSpeed: 500
-  rotateAcceration: 200
-  flyUpSpeed: 3
-  moveSpeed: 10
-  testOn: 1
 --- !u!114 &114000013086921200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -659,6 +660,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mSelectedSymbol: {fileID: 1000010527143546}
+--- !u!114 &114000013349334560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011729548744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abdd2891bdf5d64da92d2b8e5fe5d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetHeight: 6
+  maxRotateSpeed: 500
+  rotateAcceration: 500
+  flyVerticalSpeed: 8
+  moveSpeed: 10
 --- !u!114 &114000013661795700
 MonoBehaviour:
   m_ObjectHideFlags: 1

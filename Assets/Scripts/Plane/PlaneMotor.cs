@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HelicopterMotor : UnitMotor {
+public class PlaneMotor : UnitMotor {
     private Animator mAnimator;
     private Vector3 mTarget;
 

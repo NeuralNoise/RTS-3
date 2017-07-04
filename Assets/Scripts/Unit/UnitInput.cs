@@ -7,20 +7,20 @@ using System.Collections;
 [RequireComponent(typeof(UnitInteraction))] //点击自己选择
 [RequireComponent(typeof(UnitMotor))] //点击地面移动
 [RequireComponent(typeof(UnitAttack))] //点击敌人攻击
+[RequireComponent(typeof(UnitData))]
 public class UnitInput : MonoBehaviour {
     public GameObject clickSymbol;
-
-    private float mLastClickTime = 0; //上次点击的时间
-    private bool mIsLastTimeSelected = false;
-
+    
     private UnitInteraction mInteraction;
     private UnitMotor mMotor;
     private UnitAttack mAttack;
+    private UnitData mData;
 
 	void Start () {
         mInteraction = this.GetComponent<UnitInteraction>();
         mMotor = this.GetComponent<UnitMotor>();
         mAttack = this.GetComponent<UnitAttack>();
+        mData = this.GetComponent<UnitData>();
 
         InputManager.Instance.ClickUpAction += MouseClick;
 	}
@@ -32,24 +32,23 @@ public class UnitInput : MonoBehaviour {
 	
     void MouseClick()
     {
-        bool isLastTimeSelected = mIsLastTimeSelected;
-        mIsLastTimeSelected = false;
-
         RaycastHit hitInfo;
         if (IsClickSomething(out hitInfo))
         {
             GameObject hitGo = hitInfo.collider.gameObject;
             if (hitGo == gameObject)
-                HandleClickMyself(isLastTimeSelected);
+                HandleClickMyself();
             else if (hitGo.layer == LayerMask.NameToLayer(GlobalDefines.GROUND_LAYER))
                 HandleClickGround(hitInfo.point);
+            else if (hitGo.layer == LayerMask.NameToLayer(GlobalDefines.SEA_LAYER))
+                HandleClickSea(hitInfo.point);
+            else if (hitGo.tag == GlobalDefines.PLAYER_TAG)
+                HandleClickOtherPlayers(hitGo);
             else if (hitGo.tag == GlobalDefines.ENEMY_TAG)
                 HandleClickEnemy(hitGo);
             else if (hitGo.tag == GlobalDefines.BUILDING_TAG)
                 HandleClickBuilding(hitGo);
         }
-
-        mLastClickTime = Time.time;
     }
 
     bool IsClickSomething(out RaycastHit hitInfo)
@@ -63,16 +62,9 @@ public class UnitInput : MonoBehaviour {
         return false;
     }
 
-    void HandleClickMyself(bool isLastTimeSelected)
+    void HandleClickMyself()
     {
-        mIsLastTimeSelected = true;
         mInteraction.Select();
-
-        bool isDoubleClick = isLastTimeSelected && (Time.time - mLastClickTime <= GlobalDefines.DOUBLE_CLICK_GAP);
-        if(isDoubleClick)
-        {
-            Debug.Log("双击了"); //TODO
-        }
     }
 
     void HandleClickGround(Vector3 pos)
@@ -81,6 +73,18 @@ public class UnitInput : MonoBehaviour {
         {
             GameObject clickSign = Instantiate(clickSymbol) as GameObject;
             clickSign.transform.position = pos + Vector3.up * 0.01f; //稍微高出地面一点以免被地挡住
+
+            mMotor.MoveTo(pos);
+            mAttack.UnlockTarget();
+        }
+    }
+
+    void HandleClickSea(Vector3 pos)
+    {
+        if(mInteraction.IsSelected && mData.UnitType==ObjType.FlyObject)
+        {
+            GameObject clickSign = Instantiate(clickSymbol) as GameObject;
+            clickSign.transform.position = pos + Vector3.up * 0.01f; 
 
             mMotor.MoveTo(pos);
             mAttack.UnlockTarget();
@@ -103,5 +107,11 @@ public class UnitInput : MonoBehaviour {
         {
             mAttack.LockTarget(building.transform);
         }
+    }
+
+    void HandleClickOtherPlayers(GameObject player)
+    {
+        mInteraction.Deselect();
+        player.GetComponent<UnitInteraction>().Select();
     }
 }
