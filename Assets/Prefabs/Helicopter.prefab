@@ -44,7 +44,6 @@ GameObject:
   - 114: {fileID: 114000013920631244}
   - 114: {fileID: 114000011549317274}
   - 114: {fileID: 114000012571440324}
-  - 114: {fileID: 114000012873785908}
   - 65: {fileID: 65000010176886878}
   - 95: {fileID: 95000010027009882}
   - 114: {fileID: 114000013349334560}
@@ -320,7 +319,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012387081904}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7599983, y: 0.29999995, z: 0}
+  m_LocalPosition: {x: -0.17, y: 0.29999995, z: 1.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -620,8 +619,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 5
-  senseRadius: 0
-  rotateSpeed: 20
+  senseRadius: 15
+  rotateSpeed: 300
   BulletPrefab: {fileID: 1000011975929430, guid: d338d4c4fd9d1ba4b89fb65c96974e6b,
     type: 2}
   SpawnPos: {fileID: 4000014231883078}
@@ -637,17 +636,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
---- !u!114 &114000012873785908
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011729548744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b391c8f8b9f231649b44967e43ffe510, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000013086921200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -698,6 +686,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb2b4a8b2453f14cba7317b16271d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamSide: 0
+  hp: 0
+  unitType: 0
 --- !u!195 &195000011188234066
 NavMeshAgent:
   m_ObjectHideFlags: 1

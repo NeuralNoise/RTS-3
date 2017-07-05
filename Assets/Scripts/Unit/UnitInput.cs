@@ -44,8 +44,8 @@ public class UnitInput : MonoBehaviour {
                 HandleClickSea(hitInfo.point);
             else if (hitGo.tag == GlobalDefines.PLAYER_TAG)
                 HandleClickOtherPlayers(hitGo);
-            else if (hitGo.tag == GlobalDefines.ENEMY_TAG)
-                HandleClickEnemy(hitGo);
+            else if (hitGo.tag == GlobalDefines.MOVING_OBJ_TAG)
+                HandleClickMovingObject(hitGo);
             else if (hitGo.tag == GlobalDefines.BUILDING_TAG)
                 HandleClickBuilding(hitGo);
         }
@@ -81,7 +81,7 @@ public class UnitInput : MonoBehaviour {
 
     void HandleClickSea(Vector3 pos)
     {
-        if(mInteraction.IsSelected && mData.UnitType==ObjType.FlyObject)
+        if(mInteraction.IsSelected && mData.unitType==UnitType.FlyObject)
         {
             GameObject clickSign = Instantiate(clickSymbol) as GameObject;
             clickSign.transform.position = pos + Vector3.up * 0.01f; 
@@ -91,13 +91,15 @@ public class UnitInput : MonoBehaviour {
         }
     }
 
-    void HandleClickEnemy(GameObject enemy)
+    void HandleClickMovingObject(GameObject movingObj)
     {
         if(mInteraction.IsSelected)
         {
-            UnitInteraction enemyInteraction = enemy.GetComponent<UnitInteraction>();
-            enemyInteraction.Select();
-            mAttack.LockTarget(enemy.transform);
+            UnitData data = movingObj.GetComponent<UnitData>();
+            if (mData.teamSide != data.teamSide)
+            {
+                mAttack.LockTarget(movingObj.transform);
+            }
         }
     }
 

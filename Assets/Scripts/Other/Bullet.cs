@@ -4,7 +4,7 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
     public float speed = 40;
     public int demage = 5;
-    public float liveTime = 3;
+    public float liveTime = 10;
 
     private float mTimer = 0;
     private Transform mTarget;
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour {
     {
         if(coll.transform.gameObject == mTarget.gameObject)
         {
-            if (coll.gameObject.tag == GlobalDefines.ENEMY_TAG || 
+            if (coll.gameObject.tag == GlobalDefines.MOVING_OBJ_TAG || 
                 coll.gameObject.tag == GlobalDefines.PLAYER_TAG ||
                 coll.gameObject.tag == GlobalDefines.BUILDING_TAG)
             {

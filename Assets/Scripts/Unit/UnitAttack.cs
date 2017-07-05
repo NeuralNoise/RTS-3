@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(UnitData))]
 public class UnitAttack : MonoBehaviour {
     public int attackRate = 5; //攻击速度（次数/秒）
-    public float senseRadius; //进入该范围才攻击
-    public float rotateSpeed = 20f;
+    public float senseRadius = 10; //进入该范围才攻击
+    public float rotateSpeed = 300f;
     
     public GameObject BulletPrefab;
     public Transform SpawnPos; //子弹发射点
@@ -14,7 +13,7 @@ public class UnitAttack : MonoBehaviour {
     private Transform mWeapon;
     private UnitData mData;
     private float mTimer = 0;
-
+    
     void Awake()
     {
         mWeapon = transform.Find("Weapon");
@@ -48,7 +47,9 @@ public class UnitAttack : MonoBehaviour {
 
     public void LockTarget(Transform target)
     {
-        mTarget = target;
+        UnitData data = target.GetComponent<UnitData>();
+        if (IsCanLock(transform, target))
+            mTarget = target;
     }
 
     public void UnlockTarget()
@@ -79,5 +80,45 @@ public class UnitAttack : MonoBehaviour {
             return float.MaxValue;
 
         return 1.0f / attackRate;
+    }
+
+    //TODO：实现太丑了，找个好的数据结构或者用配置表
+    bool IsCanLock(Transform sourceTrans, Transform targetTrans)
+    {
+        UnitType source = sourceTrans.GetComponent<UnitData>().unitType;
+        UnitType target = targetTrans.GetComponent<UnitData>().unitType;
+
+        if (source == UnitType.GroundObject && target == UnitType.GroundObject)
+            return true;
+        if (source == UnitType.GroundObject && target == UnitType.FlyObject)
+        {
+            if (targetTrans.position.y <= GlobalDefines.GROUND_ATTACK_MIN_HEIGHT)
+                return true;
+            else
+                return false;
+        }
+        if (source == UnitType.GroundObject && target == UnitType.SuspendedObject)
+            return true;
+
+        if (source == UnitType.FlyObject && target == UnitType.GroundObject)
+            return true;
+        if (source == UnitType.FlyObject && target == UnitType.FlyObject)
+            return true;
+        if (source == UnitType.FlyObject && target == UnitType.SuspendedObject)
+            return true;
+
+        if (source == UnitType.SuspendedObject && target == UnitType.GroundObject)
+            return true;
+        if (source == UnitType.SuspendedObject && target == UnitType.FlyObject)
+        {
+            if (targetTrans.position.y <= GlobalDefines.GROUND_ATTACK_MIN_HEIGHT)
+                return true;
+            else
+                return false;
+        }
+        if (source == UnitType.SuspendedObject && target == UnitType.SuspendedObject)
+            return true;
+
+        return false;
     }
 }

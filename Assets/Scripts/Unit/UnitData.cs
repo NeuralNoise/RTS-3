@@ -2,39 +2,27 @@
 using System.Collections;
 
 public class UnitData : MonoBehaviour {
-    private int mHp;
-    private Team mTeamSide;
-    private ObjType mObjType;
-
-    public Team TeamSide
-    {
-        get { return mTeamSide; }
-        set { mTeamSide = value; }
-    } 
-
-    public ObjType UnitType
-    {
-        get { return mObjType; }
-        set { mObjType = value; }
-    }
+    public Team teamSide;
+    public int hp;
+    public UnitType unitType;
     
     void Start () {
-        mHp = GlobalDefines.MAX_HP;
-        mTeamSide = Team.Team1;
-        mObjType = ObjType.GroundObject;
+        hp = GlobalDefines.MAX_HP;
+        teamSide = Team.Team1;
+        unitType = UnitType.GroundObject;
 	}
 	
 	public float HpPercent()
     {
-        return 1.0f * mHp / GlobalDefines.MAX_HP;
+        return 1.0f * hp / GlobalDefines.MAX_HP;
     }
 
     public void DecreaseHp(int num)
     {
-        mHp -= num;
-        if(mHp <= 0)
+        hp -= num;
+        if(hp <= 0)
         {
-            mHp = 0;
+            hp = 0;
             Die();
         }
     }

@@ -20,7 +20,7 @@ public class Plane : Unit {
     new void Start()
     {
         base.Start();
-        mData.UnitType = ObjType.FlyObject;
+        mData.unitType = UnitType.FlyObject;
     }
     
     /// <summary>
