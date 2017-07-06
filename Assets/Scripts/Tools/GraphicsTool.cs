@@ -37,4 +37,42 @@ public class GraphicsTool {
         viewMatrix.m02 = right.z; viewMatrix.m12 = up.z; viewMatrix.m22 = look.z; viewMatrix.m32 = 0.0f;
         viewMatrix.m03 = x; viewMatrix.m13 = y; viewMatrix.m23 = z; viewMatrix.m33 = 1.0f;
     }
+
+    //画矩形
+    public static void DrawRect(Vector2 leftTop, Vector2 rightDown, bool isFill, ref Material mat)
+    {
+        mat.SetPass(0);
+
+        GL.PushMatrix();
+        GL.LoadPixelMatrix(); //转成屏幕坐标
+
+        if(isFill)
+        {
+            GL.Begin(GL.QUADS);
+            GL.Vertex3(leftTop.x, leftTop.y, 0);
+            GL.Vertex3(rightDown.x, leftTop.y, 0);
+            GL.Vertex3(rightDown.x, rightDown.y, 0);
+            GL.Vertex3(leftTop.x, rightDown.y, 0);
+        }
+
+        
+        GL.Begin(GL.LINES);
+
+        //上边
+        GL.Vertex3(leftTop.x, leftTop.y, 0);
+        GL.Vertex3(rightDown.x, leftTop.y, 0);
+        //下边
+        GL.Vertex3(leftTop.x, rightDown.y, 0);
+        GL.Vertex3(rightDown.x, rightDown.y, 0);
+        //左边
+        GL.Vertex3(leftTop.x, leftTop.y, 0);
+        GL.Vertex3(leftTop.x, rightDown.y, 0);
+        //右边
+        GL.Vertex3(rightDown.x, leftTop.y, 0);
+        GL.Vertex3(rightDown.x, rightDown.y, 0);
+
+        GL.End();
+
+        GL.PopMatrix();
+    }
 }
