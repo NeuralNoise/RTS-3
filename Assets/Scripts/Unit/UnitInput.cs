@@ -69,6 +69,7 @@ public class UnitInput : MonoBehaviour {
 
     void HandleClickGround(Vector3 pos)
     {
+        Debug.Log(gameObject.name + " Click Ground");
         if (mInteraction.IsSelected)
         {
             GameObject clickSign = Instantiate(clickSymbol) as GameObject;

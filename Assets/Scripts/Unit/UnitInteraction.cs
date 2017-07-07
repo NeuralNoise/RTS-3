@@ -10,6 +10,13 @@ public class UnitInteraction : MonoBehaviour {
     [SerializeField]
     private GameObject mSelectedSymbol;
 
+    void Start()
+    {
+        GameObject mainCam = GameObject.FindGameObjectWithTag(GlobalDefines.MAIN_CAMERA_TAG);
+        DrawRect drawRect = mainCam.GetComponent<DrawRect>();
+        drawRect.AddToCheckList(this);
+    }
+
     public bool IsSelected
     {
         get { return mIsSelected; }
