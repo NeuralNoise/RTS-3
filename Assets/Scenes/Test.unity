@@ -2789,9 +2789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b1fd9dddd6c6744a11f1ba91dfca4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  point1: {x: 0, y: 0}
-  point2: {x: 480, y: 280}
-  isDrawingRect: 0
 --- !u!1 &1261003155
 GameObject:
   m_ObjectHideFlags: 0
@@ -5106,6 +5103,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012314548290, guid: 145b1136eeebdac4db8811f55f4f9426, type: 2}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013920631244, guid: 145b1136eeebdac4db8811f55f4f9426,
+        type: 2}
+      propertyPath: unitType
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []

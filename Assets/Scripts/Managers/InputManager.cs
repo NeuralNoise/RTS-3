@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour {
     public Action ClickDownAction;
     public Action ClickUpAction;
     public Action<Vector3, Vector3> DragAction;
+    public Action<Vector2, Vector2> TwoTouchAction;
 
     private bool mIsDraging = false;
     private Vector3 mLastDragPos = Vector3.zero;
@@ -38,13 +39,18 @@ public class InputManager : MonoBehaviour {
 	void Update () {
         if (mIsLock)
             return;
-
-        HandleClick();
-
-        if (mIsDraging && DragAction != null)
+        
+        if (Input.touchCount == 2)
+            HandleTwoTouch();
+        else
         {
-            DragAction(mLastDragPos, Input.mousePosition);
-            mLastDragPos = Input.mousePosition;
+            HandleClick();
+
+            if (mIsDraging && DragAction != null && !Input.GetKey(KeyCode.LeftControl))
+            {
+                DragAction(mLastDragPos, Input.mousePosition);
+                mLastDragPos = Input.mousePosition;
+            }
         }
     }
 
@@ -68,5 +74,13 @@ public class InputManager : MonoBehaviour {
                 ClickUpAction();
             }
         }
+    }
+
+    void HandleTwoTouch()
+    {
+        Vector2 firstTouchPos = Input.GetTouch(0).position;
+        Vector2 secondTouchPos = Input.GetTouch(1).position;
+        if (TwoTouchAction != null)
+            TwoTouchAction(firstTouchPos, secondTouchPos);
     }
 }

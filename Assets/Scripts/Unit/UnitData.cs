@@ -6,7 +6,7 @@ public class UnitData : MonoBehaviour {
     public int hp;
     public UnitType unitType;
     
-    void Start () {
+    void Awake () {
         hp = GlobalDefines.MAX_HP;
         teamSide = Team.Team1;
         unitType = UnitType.GroundObject;
