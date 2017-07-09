@@ -40,6 +40,10 @@ public class InputManager : MonoBehaviour {
         if (mIsLock)
             return;
         
+        //点击UI
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        
         if (Input.touchCount == 2)
             HandleTwoTouch();
         else
