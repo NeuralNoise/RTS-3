@@ -1,28 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class BuildingUIManager : MonoBehaviour {
-    public static BuildingUIManager Instance = null;
-
+public class BuildingUIPanel : MonoBehaviour {
     private Transform mScrollContent;
     private GameObject mItemBtnTemplate;
 
     void Awake()
     {
-        Instance = this;
-
         InitUI();
         Test();
     }
-
-	void Start () {
-	    
-	}
-	
-	void Update () {
-	
-	}
-
+    
     void InitUI()
     {
         mScrollContent = transform.Find("ItemList/Viewport/Content");
@@ -37,6 +26,13 @@ public class BuildingUIManager : MonoBehaviour {
             GameObject item = GameObject.Instantiate(mItemBtnTemplate);
             item.transform.SetParent(mScrollContent);
             item.SetActive(true);
+            item.GetComponent<Button>().onClick.AddListener(OnClickItem);
         }
+    }
+
+    void OnClickItem()
+    {
+        Debug.Log("OnClickItem");
+        ObjectManager.Instance.CreateObject("Infantry");
     }
 }
