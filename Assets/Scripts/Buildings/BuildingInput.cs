@@ -1,23 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildingInput : MonoBehaviour {
+[RequireComponent(typeof(BaseBuilding))]
+public class BuildingInput : BaseInput {
+    private BaseBuilding mBuilding;
 
-	void Start () {
-        InputManager.Instance.ClickUpAction += MouseClick;
-    }
-	
-	void Update () {
-	
-	}
-
-    void OnDestroy()
+    protected override void Start()
     {
-        InputManager.Instance.ClickUpAction -= MouseClick;
+        base.Start();
+        mBuilding = this.GetComponent<BaseBuilding>();
     }
 
-    void MouseClick()
+    protected override void MouseClick()
     {
-        Debug.Log("Mouse Click");
+        RaycastHit hitInfo;
+        if (IsClickSomething(out hitInfo))
+        {
+            GameObject hitGo = hitInfo.collider.gameObject;
+            if (hitGo == gameObject)
+                HandleClickMyself();
+        }
+    }
+    
+    void HandleClickMyself()
+    {
+        BuildingManager.Instance.Select(mBuilding);
     }
 }

@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour {
         Instance = this;
         mIsHidingPanel = false;
         InitUI();
+        //OnClickMini(); //默认隐藏面板
     }
     
     void InitUI()
@@ -40,5 +41,10 @@ public class UIManager : MonoBehaviour {
         mBuildingUIPanel.gameObject.SetActive(!hidePanel);
         mMiniBtn.transform.Find("HideText").gameObject.SetActive(!hidePanel);
         mMiniBtn.transform.Find("ShowText").gameObject.SetActive(hidePanel);
+    }
+
+    public BuildingUIPanel GetBuildingUI()
+    {
+        return mBuildingUIPanel.GetComponent<BuildingUIPanel>();
     }
 }

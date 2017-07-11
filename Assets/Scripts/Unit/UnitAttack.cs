@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(UnitData))]
+[RequireComponent(typeof(UnitMotor))]
 public class UnitAttack : MonoBehaviour {
     public int attackRate = 5; //攻击速度（次数/秒）
     public float senseRadius = 10; //进入该范围才攻击
@@ -12,12 +13,14 @@ public class UnitAttack : MonoBehaviour {
     private Transform mTarget;
     private Transform mWeapon;
     private UnitData mData;
+    private UnitMotor mMotor;
     private float mTimer = 0;
     
     void Awake()
     {
         mWeapon = transform.Find("Weapon");
-        mData = this.GetComponent<UnitData>();
+        mData = GetComponent<UnitData>();
+        mMotor = GetComponent<UnitMotor>();
     }
     
 	void Update () {
@@ -61,7 +64,14 @@ public class UnitAttack : MonoBehaviour {
     {
         float distance = Vector3.Distance(target.position, transform.position);
         if (distance > senseRadius)
+        {
+            mMotor.MoveTo(target.position);
             return;
+        }
+        else
+        {
+            mMotor.Stop();
+        }
 
         GameObject bullet = Instantiate(BulletPrefab) as GameObject;
         bullet.GetComponent<Bullet>().Spawn(SpawnPos.position, target);

@@ -38,11 +38,8 @@ public class UnitMotor : MonoBehaviour {
         mAgent.SetDestination(target);
     }
 
-    //TODO
-    public void MoveUntilSense(Vector3 target)
+    public virtual void Stop()
     {
-        mAgent.Resume();
-        mAgent.SetDestination(target);
-        //mAgent.
+        mAgent.Stop();
     }
 }

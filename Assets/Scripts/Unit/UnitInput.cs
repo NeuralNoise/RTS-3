@@ -8,7 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(UnitMotor))] //点击地面移动
 [RequireComponent(typeof(UnitAttack))] //点击敌人攻击
 [RequireComponent(typeof(UnitData))]
-public class UnitInput : MonoBehaviour {
+public class UnitInput : BaseInput {
     public GameObject clickSymbol;
     
     private UnitInteraction mInteraction;
@@ -16,21 +16,15 @@ public class UnitInput : MonoBehaviour {
     private UnitAttack mAttack;
     private UnitData mData;
 
-	void Start () {
+	protected override void Start () {
+        base.Start();
         mInteraction = this.GetComponent<UnitInteraction>();
         mMotor = this.GetComponent<UnitMotor>();
         mAttack = this.GetComponent<UnitAttack>();
         mData = this.GetComponent<UnitData>();
-
-        InputManager.Instance.ClickUpAction += MouseClick;
 	}
-
-    void OnDestroy()
-    {
-        InputManager.Instance.ClickUpAction -= MouseClick;
-    }
-	
-    void MouseClick()
+    
+    protected override void MouseClick()
     {
         RaycastHit hitInfo;
         if (IsClickSomething(out hitInfo))
@@ -50,18 +44,7 @@ public class UnitInput : MonoBehaviour {
                 HandleClickBuilding(hitGo);
         }
     }
-
-    bool IsClickSomething(out RaycastHit hitInfo)
-    {
-        Ray ray = GameObject.FindGameObjectWithTag(GlobalDefines.MAIN_CAMERA_TAG).GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hitInfo))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
+    
     void HandleClickMyself()
     {
         mInteraction.Select();
