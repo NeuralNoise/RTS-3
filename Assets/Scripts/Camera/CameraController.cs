@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour {
     void Start()
     {
         InputManager.Instance.DragAction += DragCamera;
-        MapManager.Instance.Add(transform, true);
+        MapManager.Instance.AddCamera(transform);
     }
 
     void Destroy()
@@ -35,5 +35,13 @@ public class CameraController : MonoBehaviour {
         float z = pos.z + delta.z;
         z = Mathf.Clamp(z, VerticalBorder.x, VerticalBorder.y);
         transform.position = new Vector3(x, pos.y, z);
+    }
+
+    public void SetCameraPos(Vector3 pos)
+    {
+        Vector3 originPos = transform.position;
+        float x = Mathf.Clamp(pos.x, HorizontalBorder.x, HorizontalBorder.y);
+        float z = Mathf.Clamp(pos.z, VerticalBorder.x, VerticalBorder.y);
+        transform.position = new Vector3(x, originPos.y, z);
     }
 }

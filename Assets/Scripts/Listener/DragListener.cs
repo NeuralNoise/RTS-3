@@ -3,10 +3,10 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System;
 
-public class DragListener : IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragListener : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Action BeginDragAction;
-    public Action DragAction;
+    public Action<Vector2> DragAction;
     public Action EndDragAction;
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -18,7 +18,7 @@ public class DragListener : IBeginDragHandler, IDragHandler, IEndDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         if (DragAction != null)
-            DragAction();
+            DragAction(eventData.delta);
     }
 
     public void OnEndDrag(PointerEventData eventData)

@@ -16,6 +16,6 @@ public class Unit : MonoBehaviour {
 
     protected void Start () {
         mInteraction.Deselect();
-        MapManager.Instance.Add(transform);
+        MapManager.Instance.AddUnit(transform);
 	}
 }

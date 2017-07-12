@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour {
         get { return mIsLock; }
         set { mIsLock = value; }
     }
-
+    
     void Awake()
     {
         if (Instance == null)
@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour {
         //点击UI
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-        
+
         if (Input.touchCount == 2)
             HandleTwoTouch();
         else
