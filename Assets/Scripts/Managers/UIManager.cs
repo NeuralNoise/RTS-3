@@ -16,7 +16,6 @@ public class UIManager : MonoBehaviour {
         Instance = this;
         mIsHidingPanel = false;
         InitUI();
-        //OnClickMini(); //默认隐藏面板
     }
     
     void InitUI()

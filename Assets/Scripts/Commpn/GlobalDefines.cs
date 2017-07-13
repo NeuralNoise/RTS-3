@@ -6,6 +6,7 @@ public class GlobalDefines {
     public const float DOUBLE_CLICK_GAP = 0.5f; //两次点击要在这个时间内才算双击
     public const float MIN_ERROR_RANGE = 0.0001f; //可接受的误差值范围
     public const float GROUND_ATTACK_MIN_HEIGHT = 2f; //地面物体能攻击到的最高高度
+    public const float G = -9.8f;
 
     //Tags
     public const string PLAYER_TAG = "Player";

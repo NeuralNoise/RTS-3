@@ -63,7 +63,7 @@ public class UnitAttack : MonoBehaviour {
     void Attack(Transform target)
     {
         float distance = Vector3.Distance(target.position, transform.position);
-        if (distance > senseRadius)
+        if (distance > senseRadius) //if too far, move until you can attack
         {
             mMotor.MoveTo(target.position);
             return;
@@ -74,7 +74,7 @@ public class UnitAttack : MonoBehaviour {
         }
 
         GameObject bullet = Instantiate(BulletPrefab) as GameObject;
-        bullet.GetComponent<Bullet>().Spawn(SpawnPos.position, target);
+        bullet.GetComponent<BaseAttackMode>().Spawn(SpawnPos.position, target);
     }
 
     void LookAt(Transform target)

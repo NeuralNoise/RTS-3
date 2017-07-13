@@ -1,30 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bullet : MonoBehaviour {
-    public float speed = 40;
+/// <summary>
+/// A base class for attack mode
+/// </summary>
+public abstract class BaseAttackMode : MonoBehaviour {
     public int demage = 5;
     public float liveTime = 10;
 
-    private float mTimer = 0;
-    private Transform mTarget;
+    protected float mTimer = 0;
+    protected Transform mTarget = null;
     
-	void Update () {
+	protected void Update () {
+        CheckToDestroy();
+        MoveOrHide();
+	}
+
+    protected virtual void CheckToDestroy()
+    {
         mTimer += Time.deltaTime;
         if (mTimer >= liveTime)
             Destroy(gameObject);
+    }
 
+    protected void MoveOrHide()
+    {
         if (mTarget != null)
-            MoveToTarget(mTarget.position);
+            MoveToTarget();
         else
             gameObject.SetActive(false);
-	}
+    }
 
-    void OnCollisionEnter(Collision coll)
+    protected void OnCollisionEnter(Collision coll)
     {
-        if(coll.transform.gameObject == mTarget.gameObject)
+        if (coll.transform.gameObject == mTarget.gameObject)
         {
-            if (coll.gameObject.tag == GlobalDefines.MOVING_OBJ_TAG || 
+            if (coll.gameObject.tag == GlobalDefines.MOVING_OBJ_TAG ||
                 coll.gameObject.tag == GlobalDefines.PLAYER_TAG ||
                 coll.gameObject.tag == GlobalDefines.BUILDING_TAG)
             {
@@ -40,17 +51,11 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    public void Spawn(Vector3 pos, Transform target)
+    public virtual void Spawn(Vector3 pos, Transform target)
     {
         transform.position = pos;
         mTarget = target;
     }
 
-    void MoveToTarget(Vector3 target)
-    {
-        Vector3 toTarget = target - transform.position;
-        toTarget.Normalize();
-
-        transform.position += toTarget * speed * Time.deltaTime;
-    }
+    protected abstract void MoveToTarget();
 }

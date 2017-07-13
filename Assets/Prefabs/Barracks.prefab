@@ -21,7 +21,6 @@ GameObject:
   - 4: {fileID: 4000014182406080}
   - 114: {fileID: 114000012076852850}
   - 114: {fileID: 114000012102537404}
-  - 114: {fileID: 114000013011152428}
   - 65: {fileID: 65000014101883174}
   m_Layer: 0
   m_Name: Barracks
@@ -173,15 +172,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3abef89e131fa4f48a87b7411bb88a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114000013011152428
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010221408432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa132288a03334548b8304ef65c83283, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIPrefab: {fileID: 0}
