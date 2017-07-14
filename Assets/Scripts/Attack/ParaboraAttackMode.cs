@@ -9,49 +9,72 @@ using System;
 /// Just like a rocket gun.
 /// </summary>
 public class ParaboraAttackMode : BaseAttackMode {
-    public float speed = 5;
-    public float height = 5; //the max height of the parabola
+    public float maxHeight;
 
+    private Vector3 mStartPos;
     private Vector3 mPointOfFall; //it lock target point other than target, it cant follow target
-    private Vector2 mDirToTarget;
-    private float mVerticalSpeed;
-
+    private Vector3 mInitSpeed = Vector3.zero;
+    private Vector3 mVerticalSpeed = Vector3.zero;
+    private float mTimeScale = 1.0f;
+    private float mUpSpeedScale = 1.0f;
+    private float mDownSpeedScale = 1.0f;
+    private Vector3 mCurPos;
+    
     protected override void CheckToDestroy()
     {
         base.CheckToDestroy();
 
-        if (transform.position.y < -1) //if under ground
+        if (transform.position.y <= 0) //if under ground
             Destroy(gameObject);
     }
 
     public override void Spawn(Vector3 pos, Transform target)
     {
         base.Spawn(pos, target);
+        mCurPos = mStartPos = pos;
         mPointOfFall = target.position;
-        CalcVerticalSpeed();
+        SetMaxHeight(maxHeight);
     }
 
     protected override void MoveToTarget()
     {
-        float horizontalMoveDist = speed * Time.deltaTime;
-        Vector2 horizontalDelta = mDirToTarget * horizontalMoveDist;
+        float deltaTime = Time.deltaTime * mTimeScale;
 
-        float originSpeed = mVerticalSpeed;
-        mVerticalSpeed += GlobalDefines.G * Time.deltaTime;
-        float verticalDelta = ((mVerticalSpeed * mVerticalSpeed) - (originSpeed * originSpeed)) / (2 * GlobalDefines.G);
+        if (mInitSpeed.y + mVerticalSpeed.y > 0)
+            deltaTime *= mUpSpeedScale;
+        else
+            deltaTime *= mDownSpeedScale;
 
-        Vector3 delta = new Vector3(horizontalDelta.x, verticalDelta, horizontalDelta.y);
-        transform.position += delta;
+        mTimer += deltaTime;
+        mVerticalSpeed.y = GlobalDefines.G * mTimer;
+        mCurPos += mInitSpeed * deltaTime;
+        mCurPos += mVerticalSpeed * deltaTime;
+
+        UpdateObject();
     }
 
-    void CalcVerticalSpeed()
+    private void UpdateObject()
     {
-        Vector2 horizontalTarget = new Vector2(mPointOfFall.x, mPointOfFall.z);
-        Vector2 horizontalSrc = new Vector2(transform.position.x, transform.position.z);
-        mDirToTarget = (horizontalTarget - horizontalSrc).normalized;
-        float horizontalDistance = (horizontalSrc - horizontalTarget).magnitude;
-        float t = horizontalDistance / speed / 2;
-        float a = 2 * height / (t * t); //1/2 * a * t^2 = h 
-        mVerticalSpeed = a * t;
+        transform.position = mCurPos;
+    }
+
+    public void SetMaxHeight(float maxHeight)
+    {
+        float distance = (mPointOfFall - mStartPos).magnitude;
+        float totalTime = Mathf.Sqrt(Mathf.Abs(2.0f * this.maxHeight / GlobalDefines.G)); //h = 0.5 * g * t^2
+
+        mInitSpeed = new Vector3(
+            (mPointOfFall.x - mStartPos.x) / totalTime, //Vx = Sx / t
+            (mPointOfFall.y - mStartPos.y) / totalTime - 0.5f * GlobalDefines.G * totalTime, //Vy = Sy / t - 0.5 * g * t
+            (mPointOfFall.z - mStartPos.z) / totalTime
+        );
+        Debug.Log(maxHeight + " - " + distance + " - " + totalTime + " - " + mInitSpeed + " - " + mStartPos + " - " + mPointOfFall);
+        //SetSpeed(speed);
+    }
+
+    public void SetSpeedScale(float upScale, float downScale)
+    {
+        mUpSpeedScale = upScale;
+        mDownSpeedScale = downScale;
     }
 }
