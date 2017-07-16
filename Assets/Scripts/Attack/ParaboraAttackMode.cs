@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-//TODO
+//TODO：物理公式这里有问题，虽然游戏表现正常。
 
 /// <summary>
 /// Move around a parabola.
@@ -48,14 +48,14 @@ public class ParaboraAttackMode : BaseAttackMode {
         mTimer += deltaTime;
         mVerticalSpeed.y = GlobalDefines.G * mTimer;
         mCurPos += mInitSpeed * deltaTime;
-        mCurPos += mVerticalSpeed * deltaTime;
+        mCurPos += mVerticalSpeed * deltaTime + Vector3.up * (0.5f * GlobalDefines.G * deltaTime * deltaTime); //vt + 1/2 * a * t^2
 
         UpdateObject();
     }
 
     private void UpdateObject()
     {
-        transform.LookAt(mPointOfFall);
+        transform.LookAt(mCurPos);
         transform.Rotate(new Vector3(90, 0, 0));
         transform.position = mCurPos;
     }
@@ -70,8 +70,6 @@ public class ParaboraAttackMode : BaseAttackMode {
             (mPointOfFall.y - mStartPos.y) / totalTime - GlobalDefines.G * totalTime, //Vy = Sy / t - 0.5 * g * t
             (mPointOfFall.z - mStartPos.z) / totalTime
         );
-        Debug.Log(maxHeight + " - " + distance + " - " + totalTime + " - " + mInitSpeed + " - " + mStartPos + " - " + mPointOfFall);
-        //SetSpeed(speed);
     }
 
     public void SetSpeedScale(float upScale, float downScale)

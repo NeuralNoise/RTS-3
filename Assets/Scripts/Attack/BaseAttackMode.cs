@@ -20,7 +20,7 @@ public abstract class BaseAttackMode : MonoBehaviour {
     {
         mTimer += Time.deltaTime;
         if (mTimer >= liveTime)
-            Destroy(gameObject);
+            Die();
     }
 
     protected void MoveOrHide()
@@ -42,12 +42,12 @@ public abstract class BaseAttackMode : MonoBehaviour {
                 UnitData data = coll.transform.GetComponent<UnitData>();
                 data.DecreaseHp(demage);
             }
-            Destroy(gameObject);
+            Die();
         }
         else
         {
-            if (coll.gameObject != gameObject)
-                Destroy(gameObject);
+            //if (coll.gameObject != gameObject)
+            //    Die();
         }
     }
 
@@ -58,4 +58,10 @@ public abstract class BaseAttackMode : MonoBehaviour {
     }
 
     protected abstract void MoveToTarget();
+
+    protected void Die()
+    {
+        Debug.Log("Die");
+        Destroy(gameObject);
+    }
 }
