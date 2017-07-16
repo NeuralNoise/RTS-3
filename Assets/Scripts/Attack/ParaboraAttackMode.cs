@@ -25,7 +25,7 @@ public class ParaboraAttackMode : BaseAttackMode {
         base.CheckToDestroy();
 
         if (transform.position.y <= 0) //if under ground
-            Destroy(gameObject);
+            Die();
     }
 
     public override void Spawn(Vector3 pos, Transform target)
@@ -55,6 +55,8 @@ public class ParaboraAttackMode : BaseAttackMode {
 
     private void UpdateObject()
     {
+        transform.LookAt(mPointOfFall);
+        transform.Rotate(new Vector3(90, 0, 0));
         transform.position = mCurPos;
     }
 
@@ -65,7 +67,7 @@ public class ParaboraAttackMode : BaseAttackMode {
 
         mInitSpeed = new Vector3(
             (mPointOfFall.x - mStartPos.x) / totalTime, //Vx = Sx / t
-            (mPointOfFall.y - mStartPos.y) / totalTime - 0.5f * GlobalDefines.G * totalTime, //Vy = Sy / t - 0.5 * g * t
+            (mPointOfFall.y - mStartPos.y) / totalTime - GlobalDefines.G * totalTime, //Vy = Sy / t - 0.5 * g * t
             (mPointOfFall.z - mStartPos.z) / totalTime
         );
         Debug.Log(maxHeight + " - " + distance + " - " + totalTime + " - " + mInitSpeed + " - " + mStartPos + " - " + mPointOfFall);
