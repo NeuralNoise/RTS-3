@@ -9,16 +9,16 @@ using System;
 /// Just like a rocket gun.
 /// </summary>
 public class ParaboraAttackMode : BaseAttackMode {
-    public float maxHeight;
+    public float maxHeight = 10;
 
-    private Vector3 mStartPos;
-    private Vector3 mPointOfFall; //it lock target point other than target, it cant follow target
-    private Vector3 mInitSpeed = Vector3.zero;
-    private Vector3 mVerticalSpeed = Vector3.zero;
-    private float mTimeScale = 1.0f;
-    private float mUpSpeedScale = 1.0f;
-    private float mDownSpeedScale = 1.0f;
-    private Vector3 mCurPos;
+    protected Vector3 mStartPos;
+    protected Vector3 mPointOfFall; //it lock target point other than target, it cant follow target
+    protected Vector3 mInitSpeed = Vector3.zero;
+    protected Vector3 mVerticalSpeed = Vector3.zero;
+    protected float mTimeScale = 1.0f;
+    protected float mUpSpeedScale = 1.0f;
+    protected float mDownSpeedScale = 1.0f;
+    protected Vector3 mCurPos;
     
     protected override void CheckToDestroy()
     {
@@ -53,7 +53,7 @@ public class ParaboraAttackMode : BaseAttackMode {
         UpdateObject();
     }
 
-    private void UpdateObject()
+    protected void UpdateObject()
     {
         transform.LookAt(mCurPos);
         transform.Rotate(new Vector3(90, 0, 0));

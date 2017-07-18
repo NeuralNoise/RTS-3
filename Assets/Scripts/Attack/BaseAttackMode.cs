@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 /// <summary>
@@ -8,6 +9,7 @@ public abstract class BaseAttackMode : MonoBehaviour {
     public int demage = 5;
     public float liveTime = 10;
 
+    protected Action mAttackCallback;
     protected float mTimer = 0;
     protected Transform mTarget = null;
     
@@ -31,7 +33,8 @@ public abstract class BaseAttackMode : MonoBehaviour {
             gameObject.SetActive(false);
     }
 
-    protected void OnCollisionEnter(Collision coll)
+    //TODO: 感觉有点特殊处理
+    protected virtual void OnCollisionEnter(Collision coll)
     {
         if (coll.transform.gameObject == mTarget.gameObject)
         {
@@ -39,8 +42,7 @@ public abstract class BaseAttackMode : MonoBehaviour {
                 coll.gameObject.tag == GlobalDefines.PLAYER_TAG ||
                 coll.gameObject.tag == GlobalDefines.BUILDING_TAG)
             {
-                UnitData data = coll.transform.GetComponent<UnitData>();
-                data.DecreaseHp(demage);
+                AttackTarget(coll.transform);
             }
             Die();
         }
@@ -59,9 +61,22 @@ public abstract class BaseAttackMode : MonoBehaviour {
 
     protected abstract void MoveToTarget();
 
+    protected void AttackTarget(Transform target)
+    {
+        UnitData data = target.GetComponent<UnitData>();
+        data.DecreaseHp(demage);
+
+        if (mAttackCallback != null)
+            mAttackCallback();
+    }
+
     protected void Die()
     {
-        Debug.Log("Die");
         Destroy(gameObject);
+    }
+
+    public void AddAttackCallback(Action callback)
+    {
+        mAttackCallback += callback;
     }
 }

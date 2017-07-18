@@ -798,7 +798,7 @@ Prefab:
         type: 2}
       propertyPath: BulletPrefab
       value: 
-      objectReference: {fileID: 1000010852813674, guid: 5aeeb942edcf6c342a3a4a3d65ed4712,
+      objectReference: {fileID: 1000010852813674, guid: eaabf989b2b48094e8037fd8a3bdfd14,
         type: 2}
     - target: {fileID: 1000012285989950, guid: 7668a474c37a6b24cbf57e032b720640, type: 2}
       propertyPath: m_Name
